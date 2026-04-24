@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
   if (mode === 'scenario') {
     if (genAI) {
       try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
         const prompt = `Generate a realistic interview scenario for a ${career_title} role. Keep it short.`;
 

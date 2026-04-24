@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Chatbot from '../components/Chatbot';
 
 const features = [
   { icon: '🤖', title: 'AI-Powered', desc: 'Smart recommendations based on your skills and interests.', color: 'from-indigo-500 to-violet-500' },
@@ -48,6 +49,8 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      <Chatbot />
     </div>
   );
 }

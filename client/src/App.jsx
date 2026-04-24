@@ -12,6 +12,7 @@ import HistoryPage     from './pages/HistoryPage';
 import Profile         from './pages/Profile';
 import Login           from './pages/Login';
 import Register        from './pages/Register';
+import Interview       from './pages/Interview';
 
 // Pages that live inside the shell layout
 const PROTECTED = [
@@ -20,6 +21,7 @@ const PROTECTED = [
   { path: '/dashboard',       element: <Dashboard /> },
   { path: '/history',         element: <HistoryPage /> },
   { path: '/profile',         element: <Profile /> },
+  { path: '/interview',       element: <Interview /> },
 ];
 
 function AppShell() {

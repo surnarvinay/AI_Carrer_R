@@ -18,18 +18,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 4️⃣ Import Routes
-const authRoutes = require('./routes/auth');
+const authRoutes     = require('./routes/auth');
 const recommendRoutes = require('./routes/recommend');
-const skillsRoutes = require('./routes/skills');
+const skillsRoutes   = require('./routes/skills');
 const simulateRoutes = require('./routes/simulate');
-const historyRoutes = require('./routes/history');
+const historyRoutes  = require('./routes/history');
+const chatRoutes      = require('./routes/chat');
+const interviewRoutes = require('./routes/interview');
 
 // 5️⃣ Mount API Routes
-app.use('/api/auth', authRoutes);
+app.use('/api/auth',      authRoutes);
 app.use('/api/recommend', recommendRoutes);
-app.use('/api/history', historyRoutes);
-app.use('/api/skills', skillsRoutes);
-app.use('/api/simulate', simulateRoutes);
+app.use('/api/history',   historyRoutes);
+app.use('/api/skills',    skillsRoutes);
+app.use('/api/simulate',  simulateRoutes);
+app.use('/api/chat',      chatRoutes);
+app.use('/api/interview', interviewRoutes);
 
 // ===============================
 // 🔥 SERVE FRONTEND (VITE DIST)

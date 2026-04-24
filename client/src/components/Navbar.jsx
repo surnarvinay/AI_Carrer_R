@@ -8,8 +8,8 @@ const mobileLinks = [
   { to: '/',                icon: '🏠', label: 'Home' },
   { to: '/recommendations', icon: '🤖', label: 'Recs' },
   { to: '/dashboard',       icon: '📊', label: 'Dash' },
+  { to: '/interview',       icon: '🎤', label: 'Interview' },
   { to: '/history',         icon: '🕓', label: 'History' },
-  { to: '/profile',         icon: '👤', label: 'Profile' },
 ];
 
 export default function Navbar({ onToggleSidebar }) {

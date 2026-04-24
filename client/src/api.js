@@ -60,4 +60,18 @@ export const evaluateResponse = (career_title, user_input, conversation_history)
     mode: 'evaluate',
   });
 
+// Chat
+export const sendChatMessage = (message, history) =>
+  api.post('/chat', { message, history });
+
+// Interview Simulator
+export const startInterview = (topic) =>
+  api.post('/interview/start', { topic });
+
+export const nextInterviewQuestion = (sessionId, answer) =>
+  api.post('/interview/next', { sessionId, answer });
+
+export const evaluateInterview = (sessionId) =>
+  api.post('/interview/evaluate', { sessionId });
+
 export default api;

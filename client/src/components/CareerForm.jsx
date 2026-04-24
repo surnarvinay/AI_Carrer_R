@@ -18,7 +18,7 @@ export default function CareerForm({ onResults }) {
     setLoading(true);
     try {
       const { data } = await getRecommendations(form);
-      onResults(data.careers);
+      onResults(data.careers, data.enriched);
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong. Is the server running?');
     } finally {

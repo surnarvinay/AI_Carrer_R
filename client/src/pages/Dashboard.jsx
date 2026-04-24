@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getHistory } from '../api';
 import SkillGapAnalysis from '../components/SkillGapAnalysis';
-import CareerSimulator from '../components/CareerSimulator';
 
 export default function Dashboard() {
   const [history, setHistory] = useState([]);
@@ -102,9 +101,6 @@ export default function Dashboard() {
 
           {/* Skill Gap Analysis */}
           <SkillGapAnalysis />
-
-          {/* Career Simulator */}
-          <CareerSimulator />
         </>
       )}
     </div>
