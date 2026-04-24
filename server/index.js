@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const connectDB = require('./config/db');
 
 // 1️⃣ Load env FIRST
@@ -12,11 +13,7 @@ connectDB();
 const app = express();
 
 // 3️⃣ Middleware
-app.use(cors({
-  origin: '*', // change to your frontend URL later
-  credentials: true
-}));
-
+app.use(cors()); // optional now (safe to keep)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,40 +24,29 @@ const skillsRoutes = require('./routes/skills');
 const simulateRoutes = require('./routes/simulate');
 const historyRoutes = require('./routes/history');
 
-// 5️⃣ Mount Routes
-if (authRoutes) app.use('/api/auth', authRoutes);
-else console.error('❌ authRoutes is not valid');
+// 5️⃣ Mount API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/recommend', recommendRoutes);
+app.use('/api/history', historyRoutes);
+app.use('/api/skills', skillsRoutes);
+app.use('/api/simulate', simulateRoutes);
 
-if (recommendRoutes) app.use('/api/recommend', recommendRoutes);
-else console.error('❌ recommendRoutes is not valid');
+// ===============================
+// 🔥 SERVE FRONTEND (VITE DIST)
+// ===============================
 
-if (historyRoutes) app.use('/api/history', historyRoutes);
-else console.error('❌ historyRoutes is not valid');
+const frontendPath = path.join(__dirname, '../client/dist');
 
-if (skillsRoutes) app.use('/api/skills', skillsRoutes);
-else console.error('❌ skillsRoutes is not valid');
+app.use(express.static(frontendPath));
 
-if (simulateRoutes) app.use('/api/simulate', simulateRoutes);
-else console.error('❌ simulateRoutes is not valid');
-
-// 6️⃣ Health Check Route (IMPORTANT for deployment)
-app.get('/', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'AI Career Recommender API is live 🚀'
-  });
+// React / SPA routing fix
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
-// 7️⃣ 404 Handler
-app.use((req, res) => {
-  console.log(`❌ Route Not Found: ${req.method} ${req.url}`);
-  res.status(404).json({
-    success: false,
-    message: 'Route not found'
-  });
-});
+// ===============================
 
-// 8️⃣ Global Error Handler
+// 6️⃣ Global Error Handler
 app.use((err, req, res, next) => {
   console.error('🔥 INTERNAL SERVER ERROR');
   console.error(err.stack);
@@ -71,8 +57,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 9️⃣ Start Server
-const PORT = process.env.PORT || 5000;
+// 7️⃣ Start Server
+const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);

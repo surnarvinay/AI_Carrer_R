@@ -1,11 +1,8 @@
 import axios from 'axios';
 
-// ✅ FIX: Use full backend URL (safe for dev)
-const BASE = 'http://localhost:8060/api';
-
-// ✅ Create axios instance (cleaner + scalable)
+// ✅ Use SAME origin (no env needed now)
 const api = axios.create({
-  baseURL: BASE,
+  baseURL: '/api',
   timeout: 10000,
 });
 
@@ -30,7 +27,7 @@ const getUserId = () => {
 
 // ================= API CALLS =================
 
-// ✅ FIXED (matches backend: /api/recommend)
+// Recommendations
 export const getRecommendations = (data) =>
   api.post('/recommend', { ...data, userId: getUserId() });
 
